@@ -1,22 +1,62 @@
-// Elements
-const envelope = document.getElementById("envelope-container");
-const letter = document.getElementById("letter-container");
+// =====================================
+// ELEMENTS
+// =====================================
 
-const noBtn = document.querySelector(".no-btn");
-const yesBtn = document.querySelector(".yes-btn");
+const envelope =
+    document.getElementById("envelope-container");
 
-const title = document.getElementById("letter-title");
-const catImg = document.getElementById("letter-cat");
-const buttons = document.getElementById("letter-buttons");
+const letter =
+    document.getElementById("letter-container");
 
-const finalSection = document.getElementById("final-section");
-const dateForm = document.getElementById("date-form");
-const formSuccess = document.getElementById("form-success");
+const noBtn =
+    document.querySelector(".no-btn");
+
+const yesBtn =
+    document.querySelector(".yes-btn");
+
+const title =
+    document.getElementById("letter-title");
+
+const catImg =
+    document.getElementById("letter-cat");
+
+const buttons =
+    document.getElementById("letter-buttons");
+
+const finalSection =
+    document.getElementById("final-section");
 
 
-// ==============================
+// Choice elements
+
+const suggestionChoice =
+    document.getElementById("suggestion-choice");
+
+const ideaBtn =
+    document.getElementById("idea-btn");
+
+const surpriseBtn =
+    document.getElementById("surprise-btn");
+
+
+// Form elements
+
+const dateForm =
+    document.getElementById("date-form");
+
+const surpriseSection =
+    document.getElementById("surprise-section");
+
+const trustBtn =
+    document.getElementById("trust-btn");
+
+const formSuccess =
+    document.getElementById("form-success");
+
+
+// =====================================
 // OPEN ENVELOPE
-// ==============================
+// =====================================
 
 envelope.addEventListener("click", () => {
 
@@ -25,26 +65,33 @@ envelope.addEventListener("click", () => {
     letter.style.display = "flex";
 
     setTimeout(() => {
+
         document
             .querySelector(".letter-window")
             .classList.add("open");
+
     }, 50);
 
 });
 
 
-// ==============================
+// =====================================
 // MOVE NO BUTTON
-// ==============================
+// =====================================
 
 function moveNoButton() {
 
-    const distance = 120 + Math.random() * 100;
+    const distance =
+        120 + Math.random() * 100;
 
-    const angle = Math.random() * Math.PI * 2;
+    const angle =
+        Math.random() * Math.PI * 2;
 
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
+    const moveX =
+        Math.cos(angle) * distance;
+
+    const moveY =
+        Math.sin(angle) * distance;
 
     noBtn.style.transition =
         "transform 0.3s ease";
@@ -68,89 +115,79 @@ noBtn.addEventListener(
 );
 
 
-// ==============================
+// =====================================
 // YES BUTTON
-// ==============================
+// =====================================
 
-yesBtn.addEventListener(
-    "click",
-    async () => {
+yesBtn.addEventListener("click", () => {
 
-        // Change title
-        title.textContent =
-            "Yippeeee! ❤️";
+    // Change title
+    title.textContent =
+        "Yippeeee! ❤️";
 
 
-        // Change cat
-        catImg.src =
-            "cat_dance.gif";
+    // Change cat
+    catImg.src =
+        "cat_dance.gif";
 
 
-        // Add final animation
-        document
-            .querySelector(".letter-window")
-            .classList.add("final");
+    // Add final animation
+    document
+        .querySelector(".letter-window")
+        .classList.add("final");
 
 
-        // Hide buttons
-        buttons.style.display =
-            "none";
+    // Hide YES / NO
+    buttons.style.display =
+        "none";
 
 
-        // Show planning section
-        finalSection.style.display =
-            "block";
+    // Show planning section
+    finalSection.style.display =
+        "block";
+
+});
 
 
-        // Send YES notification
-        try {
+// =====================================
+// "I HAVE AN IDEA"
+// =====================================
 
-            const response = await fetch(
-                "/api/date-accepted",
-                {
-                    method: "POST",
+ideaBtn.addEventListener("click", () => {
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        acceptedAt:
-                            new Date().toISOString()
-
-                    })
-                }
-            );
+    // Hide choices
+    suggestionChoice.style.display =
+        "none";
 
 
-            const data =
-                await response.json();
+    // Show form
+    dateForm.style.display =
+        "flex";
+
+});
 
 
-            console.log(
-                "YES notification:",
-                data
-            );
+// =====================================
+// "YOU DECIDE"
+// =====================================
 
-        }
-        catch (error) {
+surpriseBtn.addEventListener("click", () => {
 
-            console.error(
-                "Notification failed:",
-                error
-            );
-
-        }
-
-    }
-);
+    // Hide choices
+    suggestionChoice.style.display =
+        "none";
 
 
-// ==============================
-// DATE FORM
-// ==============================
+    // Show surprise message
+    surpriseSection.style.display =
+        "block";
+
+});
+
+
+// =====================================
+// SEND CUSTOM DATE
+// =====================================
 
 dateForm.addEventListener(
     "submit",
@@ -162,13 +199,15 @@ dateForm.addEventListener(
         const suggestion =
             document
                 .getElementById("suggestion")
-                .value;
+                .value
+                .trim();
 
 
         const place =
             document
                 .getElementById("place")
-                .value;
+                .value
+                .trim();
 
 
         const date =
@@ -189,8 +228,9 @@ dateForm.addEventListener(
             );
 
 
-        // Prevent multiple clicks
-        sendButton.disabled = true;
+        // Prevent multiple submissions
+        sendButton.disabled =
+            true;
 
         sendButton.textContent =
             "Sending... ❤️";
@@ -210,6 +250,9 @@ dateForm.addEventListener(
                         },
 
                         body: JSON.stringify({
+
+                            responseType:
+                                "suggestion",
 
                             acceptedAt:
                                 new Date().toISOString(),
@@ -236,7 +279,7 @@ dateForm.addEventListener(
 
 
             console.log(
-                "Date details:",
+                "Date response:",
                 data
             );
 
@@ -244,6 +287,7 @@ dateForm.addEventListener(
             if (!response.ok) {
 
                 throw new Error(
+                    data.message ||
                     "Failed to send"
                 );
 
@@ -267,10 +311,114 @@ dateForm.addEventListener(
                 error
             );
 
+
             sendButton.disabled =
                 false;
 
             sendButton.textContent =
+                "Try Again ❤️";
+
+        }
+
+    }
+);
+
+
+// =====================================
+// "I'M TRUSTING YOU"
+// =====================================
+
+trustBtn.addEventListener(
+    "click",
+    async () => {
+
+        trustBtn.disabled =
+            true;
+
+        trustBtn.textContent =
+            "Sending... ❤️";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/date-accepted",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            responseType:
+                                "surprise",
+
+                            acceptedAt:
+                                new Date().toISOString(),
+
+                            suggestion:
+                                "No suggestion — she wants me to decide! ❤️",
+
+                            place:
+                                "You decide ❤️",
+
+                            date:
+                                "You decide ❤️",
+
+                            time:
+                                "You decide ❤️"
+
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Surprise response:",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Failed to send"
+                );
+
+            }
+
+
+            // Hide surprise section
+            surpriseSection.style.display =
+                "none";
+
+
+            // Show success
+            formSuccess.style.display =
+                "block";
+
+        }
+        catch (error) {
+
+            console.error(
+                "Failed to send date:",
+                error
+            );
+
+
+            trustBtn.disabled =
+                false;
+
+            trustBtn.textContent =
                 "Try Again ❤️";
 
         }
