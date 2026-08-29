@@ -1,92 +1,279 @@
 // Elements
 const envelope = document.getElementById("envelope-container");
 const letter = document.getElementById("letter-container");
+
 const noBtn = document.querySelector(".no-btn");
-const yesBtn = document.querySelector(".btn[alt='Yes']");
+const yesBtn = document.querySelector(".yes-btn");
 
 const title = document.getElementById("letter-title");
 const catImg = document.getElementById("letter-cat");
 const buttons = document.getElementById("letter-buttons");
-const finalText = document.getElementById("final-text");
 
-// Click Envelope
+const finalSection = document.getElementById("final-section");
+const dateForm = document.getElementById("date-form");
+const formSuccess = document.getElementById("form-success");
+
+
+// ==============================
+// OPEN ENVELOPE
+// ==============================
 
 envelope.addEventListener("click", () => {
+
     envelope.style.display = "none";
+
     letter.style.display = "flex";
 
-    setTimeout( () => {
-        document.querySelector(".letter-window").classList.add("open");
-    },50);
+    setTimeout(() => {
+        document
+            .querySelector(".letter-window")
+            .classList.add("open");
+    }, 50);
+
 });
 
-// Logic to move the NO btn
 
-noBtn.addEventListener("mouseover", () => {
-    const min = 200;
-    const max = 200;
+// ==============================
+// MOVE NO BUTTON
+// ==============================
 
-    const distance = Math.random() * (max - min) + min;
+function moveNoButton() {
+
+    const distance = 120 + Math.random() * 100;
+
     const angle = Math.random() * Math.PI * 2;
 
     const moveX = Math.cos(angle) * distance;
     const moveY = Math.sin(angle) * distance;
 
-    noBtn.style.transition = "transform 0.3s ease";
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
-});
+    noBtn.style.transition =
+        "transform 0.3s ease";
 
-// Logic to make YES btn to grow
+    noBtn.style.transform =
+        `translate(${moveX}px, ${moveY}px)`;
+}
 
-// let yesScale = 1;
 
-// yesBtn.style.position = "relative"
-// yesBtn.style.transformOrigin = "center center";
-// yesBtn.style.transition = "transform 0.3s ease";
+// Desktop
+noBtn.addEventListener(
+    "mouseover",
+    moveNoButton
+);
 
-// noBtn.addEventListener("click", () => {
-//     yesScale += 2;
 
-//     if (yesBtn.style.position !== "fixed") {
-//         yesBtn.style.position = "fixed";
-//         yesBtn.style.top = "50%";
-//         yesBtn.style.left = "50%";
-//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//     }else{
-//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//     }
-// });
+// Mobile
+noBtn.addEventListener(
+    "touchstart",
+    moveNoButton
+);
 
-// YES is clicked
 
-yesBtn.addEventListener("click", async () => {
-    title.textContent = "Yippeeee!";
+// ==============================
+// YES BUTTON
+// ==============================
 
-    catImg.src = "cat_dance.gif";
+yesBtn.addEventListener(
+    "click",
+    async () => {
 
-    document.querySelector(".letter-window").classList.add("final");
+        // Change title
+        title.textContent =
+            "Yippeeee! ❤️";
 
-    buttons.style.display = "none";
 
-    finalText.style.display = "block";
+        // Change cat
+        catImg.src =
+            "cat_dance.gif";
 
-    try {
-        const response = await fetch("/api/date-accepted", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                acceptedAt: new Date().toISOString()
-            })
-        });
 
-        const data = await response.json();
+        // Add final animation
+        document
+            .querySelector(".letter-window")
+            .classList.add("final");
 
-        console.log("Notification response:", data);
 
-    } catch (error) {
-        console.error("Notification failed:", error);
+        // Hide buttons
+        buttons.style.display =
+            "none";
+
+
+        // Show planning section
+        finalSection.style.display =
+            "block";
+
+
+        // Send YES notification
+        try {
+
+            const response = await fetch(
+                "/api/date-accepted",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        acceptedAt:
+                            new Date().toISOString()
+
+                    })
+                }
+            );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "YES notification:",
+                data
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Notification failed:",
+                error
+            );
+
+        }
+
     }
-});
+);
 
+
+// ==============================
+// DATE FORM
+// ==============================
+
+dateForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        const suggestion =
+            document
+                .getElementById("suggestion")
+                .value;
+
+
+        const place =
+            document
+                .getElementById("place")
+                .value;
+
+
+        const date =
+            document
+                .getElementById("date")
+                .value;
+
+
+        const time =
+            document
+                .getElementById("time")
+                .value;
+
+
+        const sendButton =
+            document.getElementById(
+                "send-date"
+            );
+
+
+        // Prevent multiple clicks
+        sendButton.disabled = true;
+
+        sendButton.textContent =
+            "Sending... ❤️";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/date-accepted",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            acceptedAt:
+                                new Date().toISOString(),
+
+                            suggestion:
+                                suggestion,
+
+                            place:
+                                place,
+
+                            date:
+                                date,
+
+                            time:
+                                time
+
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Date details:",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to send"
+                );
+
+            }
+
+
+            // Hide form
+            dateForm.style.display =
+                "none";
+
+
+            // Show success
+            formSuccess.style.display =
+                "block";
+
+        }
+        catch (error) {
+
+            console.error(
+                "Failed to send date:",
+                error
+            );
+
+            sendButton.disabled =
+                false;
+
+            sendButton.textContent =
+                "Try Again ❤️";
+
+        }
+
+    }
+);
