@@ -59,7 +59,7 @@ noBtn.addEventListener("mouseover", () => {
 
 // YES is clicked
 
-yesBtn.addEventListener("click", () => {
+yesBtn.addEventListener("click", async () => {
     title.textContent = "Yippeeee!";
 
     catImg.src = "cat_dance.gif";
@@ -70,9 +70,8 @@ yesBtn.addEventListener("click", () => {
 
     finalText.style.display = "block";
 
-
     try {
-        await fetch("/api/date-accepted", {
+        const response = await fetch("/api/date-accepted", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -81,6 +80,11 @@ yesBtn.addEventListener("click", () => {
                 acceptedAt: new Date().toISOString()
             })
         });
+
+        const data = await response.json();
+
+        console.log("Notification response:", data);
+
     } catch (error) {
         console.error("Notification failed:", error);
     }
