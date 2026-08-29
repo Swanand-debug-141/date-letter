@@ -315,6 +315,117 @@ h1 {
         5px 0 15px;
 
 }
+/* =================================
+   DATE CHOICE
+================================= */
+
+.question-text {
+
+    font-size:
+        clamp(17px, 3vw, 22px);
+
+    line-height: 1.4;
+
+    margin:
+        5px 0 12px;
+
+}
+
+
+.suggestion-choice {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 10px;
+
+}
+
+
+.choice-btn {
+
+    width: 100%;
+
+    padding: 12px 18px;
+
+    border: 2px solid #ffb6c1;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.85);
+
+    color: #444;
+
+    font-family:
+        "Pixelify Sans",
+        sans-serif;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.choice-btn:hover {
+
+    transform: scale(1.03);
+
+    background:
+        rgba(255, 230, 235, 0.95);
+
+}
+
+
+/* =================================
+   SURPRISE OPTION
+================================= */
+
+.surprise-section {
+
+    display: none;
+
+    width: 100%;
+
+    text-align: center;
+
+}
+
+
+.surprise-title {
+
+    font-size:
+        clamp(20px, 4vw, 28px);
+
+    line-height: 1.3;
+
+    margin:
+        10px 0;
+
+}
+
+
+.surprise-text {
+
+    font-size:
+        clamp(16px, 3vw, 20px);
+
+    line-height: 1.5;
+
+    margin:
+        10px 0 20px;
+
+}
 
 
 /* =================================
@@ -325,7 +436,7 @@ h1 {
 
     width: 100%;
 
-    display: flex;
+    display: none;
 
     flex-direction: column;
 
