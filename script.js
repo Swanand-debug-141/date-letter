@@ -337,6 +337,7 @@ trustBtn.addEventListener(
         trustBtn.textContent =
             "Sending... ❤️";
 
+
         try {
 
             const response =
@@ -356,31 +357,22 @@ trustBtn.addEventListener(
                                 "surprise",
 
                             acceptedAt:
-                                new Date().toISOString(),
-
-                            suggestion:
-                                "She doesn't have a suggestion — she wants me to plan the date! ❤️",
-
-                            place:
-                                "I'll choose the place ❤️",
-
-                            date:
-                                "I'll choose the date ❤️",
-
-                            time:
-                                "I'll choose the time ❤️"
+                                new Date().toISOString()
 
                         })
                     }
                 );
 
+
             const data =
                 await response.json();
+
 
             console.log(
                 "Date acceptance:",
                 data
             );
+
 
             if (!response.ok) {
 
@@ -391,9 +383,11 @@ trustBtn.addEventListener(
 
             }
 
+
             // Hide surprise section
             surpriseSection.style.display =
                 "none";
+
 
             // Show success
             formSuccess.textContent =
@@ -402,6 +396,7 @@ trustBtn.addEventListener(
             formSuccess.style.display =
                 "block";
 
+
         }
         catch (error) {
 
@@ -409,6 +404,7 @@ trustBtn.addEventListener(
                 "Failed to send date:",
                 error
             );
+
 
             trustBtn.disabled =
                 false;
