@@ -1,198 +1,200 @@
 export default async function handler(req, res) {
 
     if (req.method !== "POST") {
-
         return res.status(405).json({
             message: "Method not allowed"
         });
-
     }
-
 
     try {
 
         const {
             acceptedAt,
+            responseType,
             suggestion,
             place,
             date,
-            time,
-            responseType
+            time
         } = req.body;
 
+
         let subject;
-let emailContent;
+        let emailContent;
 
-if (responseType === "surprise") {
 
-    subject = "❤️ SHE SAID YES — YOU'RE PLANNING THE DATE!";
+        // ==========================================
+        // YOU DECIDE -> I'M TRUSTING YOU
+        // ==========================================
 
-    emailContent = `
-        <div
-            style="
-                font-family: Arial, sans-serif;
-                max-width: 600px;
-                margin: auto;
-                padding: 30px;
-                background: #fff5f7;
-                border-radius: 20px;
-            "
-        >
+        if (responseType === "surprise") {
 
-            <h1>
-                ❤️ SHE SAID YES!!!
-            </h1>
+            subject = "❤️ SHE SAID YES — I'M TRUSTING YOU TO PLAN THE DATE!";
 
-            <h2>
-                🎉 IT'S OFFICIALLY A DATE!
-            </h2>
+            emailContent = `
+                <div style="
+                    font-family: Arial, sans-serif;
+                    max-width: 600px;
+                    margin: auto;
+                    padding: 30px;
+                    background: #fff5f7;
+                    border-radius: 20px;
+                ">
 
-            <p>
-                She accepted your date invitation! 🥰
-            </p>
+                    <h1>❤️ SHE SAID YES!!!</h1>
 
-            <hr>
+                    <h2>🎉 IT'S OFFICIALLY A DATE!</h2>
 
-            <h2>
-                🥰 Her choice
-            </h2>
+                    <p>
+                        She accepted your date invitation! 🥰
+                    </p>
 
-            <p>
-                She chose:
-                <strong>
-                    "You decide!"
-                </strong>
-            </p>
+                    <hr>
 
-            <p>
-                She is trusting you to plan the
-                place, date and time. 😌💕
-            </p>
+                    <h2>🥰 Her response</h2>
 
-            <hr>
+                    <p>
+                        She chose:
+                        <strong>"You decide!"</strong>
+                    </p>
 
-            <h2>
-                📋 Your mission
-            </h2>
+                    <p>
+                        She is trusting you to plan the
+                        place, date and time. 😌💕
+                    </p>
 
-            <p>
-                Pick somewhere special,
-                choose a date,
-                choose a time,
-                and make it a date worth remembering. ❤️
-            </p>
+                    <hr>
 
-            <hr>
+                    <h2>📋 Your mission</h2>
 
-            <p>
-                <strong>
-                    Accepted at:
-                </strong>
-                ${acceptedAt || "Unknown"}
-            </p>
+                    <p>
+                        You get to choose:
+                    </p>
 
-            <p>
-                Looks like you officially have
-                a date! 😌💕
-            </p>
+                    <ul>
+                        <li>📍 The place</li>
+                        <li>📅 The date</li>
+                        <li>🕐 The time</li>
+                    </ul>
 
-        </div>
-    `;
+                    <p>
+                        Make it something special. ❤️
+                    </p>
 
-} else {
+                    <hr>
 
-    subject = "❤️ SHE SAID YES — DATE PLANS RECEIVED!";
+                    <p>
+                        <strong>Accepted at:</strong>
+                        ${acceptedAt || "Unknown"}
+                    </p>
 
-    emailContent = `
-        <div
-            style="
-                font-family: Arial, sans-serif;
-                max-width: 600px;
-                margin: auto;
-                padding: 30px;
-                background: #fff5f7;
-                border-radius: 20px;
-            "
-        >
+                    <h2>
+                        😌 You officially have a date!
+                    </h2>
 
-            <h1>
-                ❤️ SHE SAID YES!!!
-            </h1>
+                </div>
+            `;
 
-            <h2>
-                🎉 IT'S OFFICIALLY A DATE!
-            </h2>
+        }
 
-            <p>
-                She accepted your date invitation
-                and sent you her date preferences! 🥰
-            </p>
 
-            <hr>
+        // ==========================================
+        // I HAVE AN IDEA
+        // ==========================================
 
-            <h2>
-                💭 Her suggestion
-            </h2>
+        else if (responseType === "suggestion") {
 
-            <p>
-                ${suggestion || "No suggestion provided"}
-            </p>
+            subject = "❤️ SHE SAID YES — HERE ARE HER DATE PLANS!";
 
-            <h2>
-                📍 Place
-            </h2>
+            emailContent = `
+                <div style="
+                    font-family: Arial, sans-serif;
+                    max-width: 600px;
+                    margin: auto;
+                    padding: 30px;
+                    background: #fff5f7;
+                    border-radius: 20px;
+                ">
 
-            <p>
-                ${place || "Not specified"}
-            </p>
+                    <h1>❤️ SHE SAID YES!!!</h1>
 
-            <h2>
-                📅 Date
-            </h2>
+                    <h2>🎉 IT'S OFFICIALLY A DATE!</h2>
 
-            <p>
-                ${date || "Not specified"}
-            </p>
+                    <p>
+                        She accepted your date invitation
+                        and sent you her date preferences! 🥰
+                    </p>
 
-            <h2>
-                🕐 Time
-            </h2>
+                    <hr>
 
-            <p>
-                ${time || "Not specified"}
-            </p>
+                    <h2>💭 Her suggestion</h2>
 
-            <hr>
+                    <p>
+                        ${suggestion || "No suggestion provided"}
+                    </p>
 
-            <p>
-                <strong>
-                    Accepted at:
-                </strong>
-                ${acceptedAt || "Unknown"}
-            </p>
+                    <h2>📍 Place</h2>
 
-            <p>
-                Now go make this date special. ❤️
-            </p>
+                    <p>
+                        ${place || "Not specified"}
+                    </p>
 
-        </div>
-    `;
-}
+                    <h2>📅 Date</h2>
+
+                    <p>
+                        ${date || "Not specified"}
+                    </p>
+
+                    <h2>🕐 Time</h2>
+
+                    <p>
+                        ${time || "Not specified"}
+                    </p>
+
+                    <hr>
+
+                    <p>
+                        <strong>Accepted at:</strong>
+                        ${acceptedAt || "Unknown"}
+                    </p>
+
+                    <h2>
+                        ❤️ Now go make this date special!
+                    </h2>
+
+                </div>
+            `;
+
+        }
+
+
+        // ==========================================
+        // INVALID RESPONSE TYPE
+        // ==========================================
+
+        else {
+
+            return res.status(400).json({
+                message: "Invalid response type"
+            });
+
+        }
+
+
+        // ==========================================
+        // SEND EMAIL THROUGH RESEND
+        // ==========================================
 
         const response = await fetch(
             "https://api.resend.com/emails",
             {
-
                 method: "POST",
 
                 headers: {
-
                     "Authorization":
                         `Bearer ${process.env.RESEND_API_KEY}`,
 
                     "Content-Type":
                         "application/json"
-
                 },
 
                 body: JSON.stringify({
@@ -207,16 +209,22 @@ if (responseType === "surprise") {
                     subject:
                         subject,
 
-                    html: emailContent
+                    html:
+                        emailContent
 
                 })
-
             }
         );
 
 
         const data =
             await response.json();
+
+
+        console.log(
+            "Resend response:",
+            data
+        );
 
 
         if (!response.ok) {
@@ -226,22 +234,16 @@ if (responseType === "surprise") {
                 data
             );
 
-
             return res.status(500).json({
-
-                message:
-                    "Failed to send email"
-
+                message: "Failed to send email",
+                error: data
             });
 
         }
 
 
         return res.status(200).json({
-
-            message:
-                "Notification sent successfully"
-
+            message: "Notification sent successfully"
         });
 
 
@@ -253,14 +255,9 @@ if (responseType === "surprise") {
             error
         );
 
-
         return res.status(500).json({
-
-            message:
-                "Internal server error"
-
+            message: "Internal server error"
         });
 
     }
-
 }
