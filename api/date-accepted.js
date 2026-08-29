@@ -16,10 +16,14 @@ export default async function handler(req, res) {
             suggestion,
             place,
             date,
-            time
+            time,
+            responseType
         } = req.body;
 
-
+        const subject =
+        responseType === "surprise"
+            ? "❤️ She said YES — I'm planning the date!"
+            : "❤️ She said YES — Here's her date idea!";
         const response = await fetch(
             "https://api.resend.com/emails",
             {
@@ -46,7 +50,7 @@ export default async function handler(req, res) {
                     ],
 
                     subject:
-                        "❤️ Date Accepted + Date Plans!",
+                        subject,
 
                     html: `
 
