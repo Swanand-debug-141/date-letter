@@ -179,10 +179,6 @@ if (responseType === "surprise") {
     `;
 }
 
-        const subject =
-        responseType === "surprise"
-            ? "❤️ She said YES — I'm planning the date!"
-            : "❤️ She said YES — Here's her date idea!";
         const response = await fetch(
             "https://api.resend.com/emails",
             {
