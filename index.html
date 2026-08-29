@@ -77,90 +77,161 @@
             </div>
 
 
-            <!-- Final message -->
-            <div
-                id="final-section"
-                class="final-section"
-            >
+          <!-- Final message + date planning -->
+          <div
+              id="final-section"
+              class="final-section"
+          >
 
-                <p id="final-text" class="final-text">
-                    Yippeeee! ❤️
-                </p>
+              <p id="final-text" class="final-text">
+                  Yippeeee! ❤️
+              </p>
 
-                <p class="planning-text">
-                    Now let's plan our date together 😌💕
-                </p>
+              <p class="planning-text">
+                  Okay, one tiny question... 💭
+              </p>
 
-
-                <!-- Date Form -->
-                <form id="date-form">
-
-                    <label for="suggestion">
-                        Do you have any suggestion for our date? 💭
-                    </label>
-
-                    <textarea
-                        id="suggestion"
-                        name="suggestion"
-                        placeholder="Anything you'd love to do..."
-                        rows="3"
-                    ></textarea>
+              <p class="question-text">
+                  Do you have any ideas for our date?
+              </p>
 
 
-                    <label for="place">
-                        Where should we go? 📍
-                    </label>
+              <!-- =========================
+                  CHOICE
+              ========================== -->
 
-                    <input
-                        type="text"
-                        id="place"
-                        name="place"
-                        placeholder="Your favourite place..."
-                        required
-                    />
+              <div
+                  id="suggestion-choice"
+                  class="suggestion-choice"
+              >
 
+                  <button
+                      type="button"
+                      id="idea-btn"
+                      class="choice-btn"
+                  >
+                      💭 I have an idea!
+                  </button>
 
-                    <label for="date">
-                        What date should we go? 📅
-                    </label>
+                  <button
+                      type="button"
+                      id="surprise-btn"
+                      class="choice-btn"
+                  >
+                      🥰 You decide!
+                  </button>
 
-                    <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        required
-                    />
-
-
-                    <label for="time">
-                        What time works for you? 🕐
-                    </label>
-
-                    <input
-                        type="time"
-                        id="time"
-                        name="time"
-                        required
-                    />
+              </div>
 
 
-                    <button
-                        type="submit"
-                        id="send-date"
-                    >
-                        Send ❤️
-                    </button>
+              <!-- =========================
+                  IDEA FORM
+              ========================== -->
 
-                </form>
+              <form
+                  id="date-form"
+              >
 
-                <p
-                    id="form-success"
-                    class="form-success"
-                >
-                    Sent! ❤️ I can't wait!
-                </p>
+                  <label for="suggestion">
+                      Tell me your idea 💭
+                  </label>
 
-            </div>
+                  <textarea
+                      id="suggestion"
+                      name="suggestion"
+                      placeholder="Something you'd love to do..."
+                      rows="3"
+                  ></textarea>
+
+
+                  <label for="place">
+                      Where should we go? 📍
+                  </label>
+
+                  <input
+                      type="text"
+                      id="place"
+                      name="place"
+                      placeholder="Your favourite place..."
+                      required
+                  />
+
+
+                  <label for="date">
+                      What date should we go? 📅
+                  </label>
+
+                  <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      required
+                  />
+
+
+                  <label for="time">
+                      What time works for you? 🕐
+                  </label>
+
+                  <input
+                      type="time"
+                      id="time"
+                      name="time"
+                      required
+                  />
+
+
+                  <button
+                      type="submit"
+                      id="send-date"
+                  >
+                      Send ❤️
+                  </button>
+
+              </form>
+
+
+              <!-- =========================
+                  SURPRISE OPTION
+              ========================== -->
+
+              <div
+                  id="surprise-section"
+                  class="surprise-section"
+              >
+
+                  <p class="surprise-title">
+                      Oooo, leaving it to me? 👀❤️
+                  </p>
+
+                  <p class="surprise-text">
+                      Don't worry, I'll plan something special.
+                      Your only job is to show up. 😌💕
+                  </p>
+
+                  <button
+                      type="button"
+                      id="trust-btn"
+                      class="choice-btn"
+                  >
+                      I'm trusting you ❤️
+                  </button>
+
+              </div>
+
+
+              <!-- =========================
+                  SUCCESS
+              ========================== -->
+
+              <p
+                  id="form-success"
+                  class="form-success"
+              >
+                  Perfect! It's a date! ❤️🥰
+              </p>
+
+          </div>
 
         </div>
 
