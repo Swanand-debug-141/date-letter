@@ -1,139 +1,569 @@
+* {
+    box-sizing: border-box;
+}
+
+
 body {
     margin: 0;
-    height: 100vh;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     background-image: url("heart-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     font-family: "Pixelify Sans", sans-serif;
+
+    overflow: hidden;
 }
 
-/* Envelope Screen */
+
+/* =================================
+   ENVELOPE
+================================= */
+
 #envelope-container {
+
+    width: 100%;
+    max-width: 500px;
+
+    padding: 20px;
+
     text-align: center;
-    cursor:pointer;
+
+    cursor: pointer;
 }
+
+
+#envelope {
+
+    width: min(55vw, 280px);
+
+    height: auto;
+
+    animation:
+        pulse 1.5s infinite;
+
+    cursor: pointer;
+}
+
+
+.envelope-text {
+
+    margin: 15px 0 0;
+
+    font-size:
+        clamp(20px, 5vw, 40px);
+
+}
+
+
+/* Envelope animation */
 
 @keyframes pulse {
+
     0% {
-        transform:scale(1);
+        transform: scale(1);
     }
+
     50% {
         transform: scale(1.1);
     }
+
     100% {
         transform: scale(1);
     }
+
 }
 
-#envelope{
-    width: 200px;
-    animation: pulse 1.5s infinite;
-    cursor: pointer;
-}
 
-#letter-container{
+/* =================================
+   LETTER CONTAINER
+================================= */
+
+#letter-container {
+
     display: none;
-    position:fixed;
+
+    position: fixed;
+
     inset: 0;
+
+    width: 100%;
+    height: 100%;
+
     justify-content: center;
     align-items: center;
+
+    padding: 10px;
 }
 
-.letter-window{
-    width: 90vw;
-    max-width: 800px;
-    aspect-ratio: 3/2;
-    padding: 20px 20px 0 20px;
+
+/* =================================
+   LETTER WINDOW
+================================= */
+
+.letter-window {
+
+    width: min(90vw, 800px);
+
+    max-height: 95vh;
+
+    padding:
+        clamp(80px, 12vw, 180px)
+        30px
+        30px;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
+
     text-align: center;
-    background-image: url("window.png");
-    background-size: contain;
+
+    background-image:
+        url("window.png");
+
+    background-size: 100% 100%;
+
     background-repeat: no-repeat;
+
     background-position: center;
+
     border-radius: 12px;
-    gap: 1px;
-    padding-top: 180px;
+
+    gap: 5px;
+
+    overflow-y: auto;
+
 
     transform: scale(1.2);
+
     opacity: 0;
-    transition: transform 0.6s ease, opacity 0.6s ease;
+
+    transition:
+        transform 0.6s ease,
+        opacity 0.6s ease;
+
 }
+
 
 .letter-window.open {
+
     transform: scale(1);
+
     opacity: 1;
+
 }
+
+
+/* =================================
+   TITLE
+================================= */
 
 h1 {
-    font-size: 30px;
-    margin:0;
+
+    font-size:
+        clamp(20px, 4vw, 30px);
+
+    margin: 0;
+
 }
 
-p {
-    font-size: 40px;
-}
 
-/* Cat */
+/* =================================
+   CAT
+================================= */
 
 .cat {
-    width: 250px;
+
+    width:
+        min(35vw, 250px);
+
+    max-width: 250px;
+
+    height: auto;
+
     margin: 10px 0;
-    transition: width 0.4s ease;
+
+    transition:
+        width 0.4s ease;
+
 }
+
 
 .letter-window.final .cat {
-    width: 180px;
+
+    width:
+        min(30vw, 180px);
+
 }
 
-/* buttons */
+
+/* =================================
+   BUTTONS
+================================= */
+
 .buttons {
+
     display: flex;
+
     justify-content: center;
+
+    align-items: center;
+
     gap: 30px;
+
     position: relative;
+
 }
 
-.no-wrapper{
-    position:relative;
+
+.no-wrapper {
+
+    position: relative;
+
 }
+
 
 .btn {
-    width: 120px;
+
+    width:
+        clamp(80px, 20vw, 120px);
+
+    height: auto;
+
     cursor: pointer;
+
     user-select: none;
+
 }
 
-.yes-btn,
-.no-btn {
-width: 120px;
-height: auto;
-display: inline-block;
-}
 
 .yes-btn {
+
     position: relative;
+
     z-index: 2;
-    transform-origin: center center;
-    transition: transform 0.3s ease;
+
+    transform-origin: center;
+
+    transition:
+        transform 0.3s ease;
+
 }
+
 
 .no-btn {
+
     z-index: 1;
+
     position: relative;
-    transition: transform 0.15s ease;
+
+    transition:
+        transform 0.15s ease;
+
     cursor: default;
+
 }
 
-.final-text{
-    font-size: 22px;
+
+/* =================================
+   FINAL SECTION
+================================= */
+
+.final-section {
+
+    display: none;
+
+    width: 100%;
+
+    max-width: 500px;
+
+}
+
+
+.final-text {
+
+    font-size:
+        clamp(24px, 5vw, 34px);
+
+    line-height: 1.3;
+
+    margin: 5px 0;
+
+}
+
+
+.planning-text {
+
+    font-size:
+        clamp(16px, 3vw, 22px);
+
     line-height: 1.4;
-    text-align: center;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgba(255,240,240,0.5);
+
+    margin:
+        5px 0 15px;
+
+}
+
+
+/* =================================
+   FORM
+================================= */
+
+#date-form {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    text-align: left;
+
+}
+
+
+#date-form label {
+
+    font-size:
+        clamp(14px, 2.5vw, 18px);
+
+    margin-top: 5px;
+
+}
+
+
+#date-form input,
+#date-form textarea {
+
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 2px solid #ffb6c1;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.85);
+
+    font-family:
+        "Pixelify Sans",
+        sans-serif;
+
+    font-size: 16px;
+
+    outline: none;
+
+}
+
+
+#date-form textarea {
+
+    resize: vertical;
+
+    min-height: 70px;
+
+}
+
+
+#date-form input:focus,
+#date-form textarea:focus {
+
+    border-color: #ff6f91;
+
+}
+
+
+/* =================================
+   SEND BUTTON
+================================= */
+
+#send-date {
+
+    margin-top: 10px;
+
+    padding: 12px 20px;
+
+    border: none;
+
     border-radius: 12px;
+
+    background: #ff6f91;
+
+    color: white;
+
+    font-family:
+        "Pixelify Sans",
+        sans-serif;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+#send-date:hover {
+
+    transform: scale(1.05);
+
+}
+
+
+#send-date:disabled {
+
+    opacity: 0.7;
+
+    cursor: wait;
+
+}
+
+
+/* =================================
+   SUCCESS
+================================= */
+
+.form-success {
+
+    display: none;
+
+    font-size:
+        clamp(20px, 4vw, 28px);
+
+    text-align: center;
+
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        overflow: hidden;
+
+    }
+
+
+    #envelope {
+
+        width:
+            min(65vw, 240px);
+
+    }
+
+
+    .envelope-text {
+
+        font-size: 24px;
+
+    }
+
+
+    #letter-container {
+
+        padding: 5px;
+
+        align-items: center;
+
+    }
+
+
+    .letter-window {
+
+        width: 96vw;
+
+        max-height: 96vh;
+
+        padding:
+            85px
+            15px
+            20px;
+
+        background-size:
+            100% 100%;
+
+    }
+
+
+    .cat {
+
+        width: 170px;
+
+    }
+
+
+    .letter-window.final .cat {
+
+        width: 130px;
+
+    }
+
+
+    .buttons {
+
+        gap: 15px;
+
+    }
+
+
+    .btn {
+
+        width: 90px;
+
+    }
+
+
+    .final-section {
+
+        max-width: 100%;
+
+    }
+
+
+    #date-form {
+
+        gap: 6px;
+
+    }
+
+
+    #date-form input,
+    #date-form textarea {
+
+        font-size: 16px;
+
+        padding: 9px 10px;
+
+    }
+
+
+    #send-date {
+
+        width: 100%;
+
+        font-size: 18px;
+
+    }
+
 }
