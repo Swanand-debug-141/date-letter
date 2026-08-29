@@ -1,46 +1,172 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
-    <title>Date Letter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Date Letter ❤️</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Aldrich&family=Pixelify+Sans:wght@400..700&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Aldrich&family=Pixelify+Sans:wght@400..700&display=swap"
+        rel="stylesheet"
     />
-    <title>Document</title>
-  </head>
-  <body>
+</head>
+
+<body>
+
     <!-- Envelope Screen -->
     <div id="envelope-container">
-      <img src="envelope.png" alt="Envelope" id="envelope" />
-      <p>♡ Letter for You ♡</p>
+        <img
+            src="envelope.png"
+            alt="Envelope"
+            id="envelope"
+        />
+
+        <p class="envelope-text">
+            ♡ Letter for You ♡
+        </p>
     </div>
+
 
     <!-- Letter Screen -->
     <div id="letter-container">
-      <div class="letter-window">
-        <h1 id="letter-title">Will you be my Date?</h1>
 
-        <img src="cat_heart.gif" class="cat" id="letter-cat" />
+        <div class="letter-window">
 
-        <div class="buttons" id="letter-buttons">
-          <img src="yes.png" class="btn yes-btn" alt="Yes" />
+            <h1 id="letter-title">
+                Will you be my Date?
+            </h1>
 
-          <div class="no-wrapper">
-            <img src="no.png" class="btn no-btn" alt="No" />
-          </div>
+            <img
+                src="cat_heart.gif"
+                class="cat"
+                id="letter-cat"
+                alt="Cute cat"
+            />
+
+            <!-- YES / NO -->
+            <div
+                class="buttons"
+                id="letter-buttons"
+            >
+
+                <img
+                    src="yes.png"
+                    class="btn yes-btn"
+                    alt="Yes"
+                />
+
+                <div class="no-wrapper">
+
+                    <img
+                        src="no.png"
+                        class="btn no-btn"
+                        alt="No"
+                    />
+
+                </div>
+
+            </div>
+
+
+            <!-- Final message -->
+            <div
+                id="final-section"
+                class="final-section"
+            >
+
+                <p id="final-text" class="final-text">
+                    Yippeeee! ❤️
+                </p>
+
+                <p class="planning-text">
+                    Now let's plan our date together 😌💕
+                </p>
+
+
+                <!-- Date Form -->
+                <form id="date-form">
+
+                    <label for="suggestion">
+                        Do you have any suggestion for our date? 💭
+                    </label>
+
+                    <textarea
+                        id="suggestion"
+                        name="suggestion"
+                        placeholder="Anything you'd love to do..."
+                        rows="3"
+                    ></textarea>
+
+
+                    <label for="place">
+                        Where should we go? 📍
+                    </label>
+
+                    <input
+                        type="text"
+                        id="place"
+                        name="place"
+                        placeholder="Your favourite place..."
+                        required
+                    />
+
+
+                    <label for="date">
+                        What date should we go? 📅
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        required
+                    />
+
+
+                    <label for="time">
+                        What time works for you? 🕐
+                    </label>
+
+                    <input
+                        type="time"
+                        id="time"
+                        name="time"
+                        required
+                    />
+
+
+                    <button
+                        type="submit"
+                        id="send-date"
+                    >
+                        Send ❤️
+                    </button>
+
+                </form>
+
+                <p
+                    id="form-success"
+                    class="form-success"
+                >
+                    Sent! ❤️ I can't wait!
+                </p>
+
+            </div>
+
         </div>
 
-        <p id="final-text" class="final-text" style="display: none">
-          <strong>Date:</strong> Meow Restaurant at 7pm. Dress fancy!
-        </p>
-      </div>
     </div>
+
     <script src="script.js"></script>
-  </body>
+
+</body>
 </html>
