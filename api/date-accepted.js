@@ -20,6 +20,165 @@ export default async function handler(req, res) {
             responseType
         } = req.body;
 
+        let subject;
+let emailContent;
+
+if (responseType === "surprise") {
+
+    subject = "❤️ SHE SAID YES — YOU'RE PLANNING THE DATE!";
+
+    emailContent = `
+        <div
+            style="
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: auto;
+                padding: 30px;
+                background: #fff5f7;
+                border-radius: 20px;
+            "
+        >
+
+            <h1>
+                ❤️ SHE SAID YES!!!
+            </h1>
+
+            <h2>
+                🎉 IT'S OFFICIALLY A DATE!
+            </h2>
+
+            <p>
+                She accepted your date invitation! 🥰
+            </p>
+
+            <hr>
+
+            <h2>
+                🥰 Her choice
+            </h2>
+
+            <p>
+                She chose:
+                <strong>
+                    "You decide!"
+                </strong>
+            </p>
+
+            <p>
+                She is trusting you to plan the
+                place, date and time. 😌💕
+            </p>
+
+            <hr>
+
+            <h2>
+                📋 Your mission
+            </h2>
+
+            <p>
+                Pick somewhere special,
+                choose a date,
+                choose a time,
+                and make it a date worth remembering. ❤️
+            </p>
+
+            <hr>
+
+            <p>
+                <strong>
+                    Accepted at:
+                </strong>
+                ${acceptedAt || "Unknown"}
+            </p>
+
+            <p>
+                Looks like you officially have
+                a date! 😌💕
+            </p>
+
+        </div>
+    `;
+
+} else {
+
+    subject = "❤️ SHE SAID YES — DATE PLANS RECEIVED!";
+
+    emailContent = `
+        <div
+            style="
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: auto;
+                padding: 30px;
+                background: #fff5f7;
+                border-radius: 20px;
+            "
+        >
+
+            <h1>
+                ❤️ SHE SAID YES!!!
+            </h1>
+
+            <h2>
+                🎉 IT'S OFFICIALLY A DATE!
+            </h2>
+
+            <p>
+                She accepted your date invitation
+                and sent you her date preferences! 🥰
+            </p>
+
+            <hr>
+
+            <h2>
+                💭 Her suggestion
+            </h2>
+
+            <p>
+                ${suggestion || "No suggestion provided"}
+            </p>
+
+            <h2>
+                📍 Place
+            </h2>
+
+            <p>
+                ${place || "Not specified"}
+            </p>
+
+            <h2>
+                📅 Date
+            </h2>
+
+            <p>
+                ${date || "Not specified"}
+            </p>
+
+            <h2>
+                🕐 Time
+            </h2>
+
+            <p>
+                ${time || "Not specified"}
+            </p>
+
+            <hr>
+
+            <p>
+                <strong>
+                    Accepted at:
+                </strong>
+                ${acceptedAt || "Unknown"}
+            </p>
+
+            <p>
+                Now go make this date special. ❤️
+            </p>
+
+        </div>
+    `;
+}
+
         const subject =
         responseType === "surprise"
             ? "❤️ She said YES — I'm planning the date!"
@@ -52,104 +211,7 @@ export default async function handler(req, res) {
                     subject:
                         subject,
 
-                    html: `
-
-                        <div
-                            style="
-                                font-family: Arial, sans-serif;
-                                max-width: 600px;
-                                margin: auto;
-                                padding: 30px;
-                                background: #fff5f7;
-                                border-radius: 20px;
-                            "
-                        >
-
-                            <h1>
-                                ❤️ SHE SAID YES!!!
-                            </h1>
-
-
-                            <p>
-                                Your date invitation
-                                has officially been accepted! 🎉
-                            </p>
-
-
-                            <hr>
-
-
-                            <h2>
-                                💭 Her suggestion
-                            </h2>
-
-                            <p>
-                                ${
-                                    suggestion ||
-                                    "No suggestion provided"
-                                }
-                            </p>
-
-
-                            <h2>
-                                📍 Place
-                            </h2>
-
-                            <p>
-                                ${
-                                    place ||
-                                    "Not specified"
-                                }
-                            </p>
-
-
-                            <h2>
-                                📅 Date
-                            </h2>
-
-                            <p>
-                                ${
-                                    date ||
-                                    "Not specified"
-                                }
-                            </p>
-
-
-                            <h2>
-                                🕐 Time
-                            </h2>
-
-                            <p>
-                                ${
-                                    time ||
-                                    "Not specified"
-                                }
-                            </p>
-
-
-                            <hr>
-
-
-                            <p>
-                                <strong>
-                                    Accepted at:
-                                </strong>
-
-                                ${
-                                    acceptedAt ||
-                                    "Unknown"
-                                }
-                            </p>
-
-
-                            <p>
-                                Looks like you have
-                                some planning to do 😌💕
-                            </p>
-
-                        </div>
-
-                    `
+                    html: emailContent
 
                 })
 
